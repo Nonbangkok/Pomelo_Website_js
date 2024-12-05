@@ -1,47 +1,83 @@
-// URL to the TensorFlow.js model (hosted on GitHub Pages or locally)
-const modelURL = './tfjs_model/model.json';
+// script.js
+
+// Assuming you have a TensorFlow.js model saved at 'test_model/model.json'
 
 let model;
+const fileInput = document.getElementById('file-input');
+const selectedImage = document.getElementById('selected-image');
+const predictButton = document.getElementById('predict-button');
+const resultDiv = document.getElementById('result');
 
-// Load the TensorFlow.js model
-async function loadModel() {
-    model = await tf.loadGraphModel(modelURL);
-    console.log("Model loaded successfully");
-}
+// Load the model asynchronously
+(async function() {
+    try {
+        model = await tf.loadLayersModel('teach/model.json');
+        console.log('Model loaded successfully');
+    } catch (error) {
+        console.error('Error loading the model:', error);
+        alert('Failed to load the model. Please check the console for more details.');
+    }
+})();
 
-// Preprocess image for prediction
-function preprocessImage(file) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 256; // Resize to match model input
-            canvas.height = 256;
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const input = tf.browser.fromPixels(imageData).toFloat().div(255).expandDims();
-            resolve(input);
-        };
-        img.onerror = reject;
-        img.src = URL.createObjectURL(file);
-    });
-}
-
-// Predict and display the result
-async function predict(file) {
-    const inputTensor = await preprocessImage(file);
-    const predictions = model.predict(inputTensor);
-    predictions.print();
-    document.getElementById('result').innerText = `Prediction: ${predictions.dataSync()}`;
-}
-
-// Event listeners
-document.getElementById('file-input').addEventListener('change', async (event) => {
+// Handle image selection
+fileInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
-        await predict(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            selectedImage.src = e.target.result;
+            selectedImage.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
     }
 });
 
-document.addEventListener('DOMContentLoaded', loadModel);
+// Handle prediction
+predictButton.addEventListener('click', async () => {
+    if (!model) {
+        alert('The model is not loaded yet. Please wait and try again.');
+        return;
+    }
+    if (!fileInput.files[0]) {
+        alert('Please select an image to predict.');
+        return;
+    }
+
+    predictButton.disabled = true;
+    predictButton.textContent = 'Predicting...';
+    resultDiv.textContent = '';
+
+    // Preprocess the image
+    const imageTensor = preprocessImage(selectedImage);
+
+    // Make prediction
+    try {
+        const prediction = await model.predict(imageTensor).data();
+        displayResult(prediction);
+    } catch (error) {
+        console.error('Error during prediction:', error);
+        alert('An error occurred during prediction. Please check the console for more details.');
+    }
+
+    predictButton.disabled = false;
+    predictButton.textContent = 'Predict';
+});
+
+// Preprocess the image to match the model's expected input
+function preprocessImage(image) {
+    const tensor = tf.browser.fromPixels(image)
+        .resizeNearestNeighbor([256, 256]) // Change to the input size your model expects
+        .toFloat()
+        .div(tf.scalar(255.0))
+        .expandDims();
+    return tensor;
+}
+
+// Display the prediction result
+function displayResult(prediction) {
+    const classes = ['Diseased', 'Good']; // Replace with your actual class names
+    const confidence = prediction[0];
+    const predictedClass = confidence > 0.5 ? classes[0] : classes[1];
+
+    resultDiv.textContent = `Prediction: ${predictedClass}`;
+}

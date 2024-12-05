@@ -1,21 +1,45 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 20px;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
     color: #333;
+    margin-top: 50px;
 }
 
-input, button {
-    margin: 10px;
-    padding: 10px;
+p {
+    color: #555;
+}
+
+#file-input {
+    margin: 20px 0;
+}
+
+#selected-image {
+    max-width: 300px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+#predict-button {
+    padding: 10px 20px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 #result {
     margin-top: 20px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
+    color: #444;
 }
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }

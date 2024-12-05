@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web AI with TensorFlow.js</title>
+    <title>AI Binary Classification</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>AI Model</h1>
+    <h1>AI Binary Classification</h1>
+    <p>Select an image to classify:</p>
     <input type="file" id="file-input" accept="image/*">
+    <br><br>
+    <img id="selected-image" src="#" alt="Selected Image" style="display: none;">
+    <br><br>
     <button id="predict-button">Predict</button>
     <div id="result"></div>
 </body>
