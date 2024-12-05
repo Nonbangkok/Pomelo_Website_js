@@ -6,15 +6,23 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>AI Binary Classification</h1>
-    <p>Select an image to classify:</p>
-    <input type="file" id="file-input" accept="image/*">
-    <br><br>
-    <img id="selected-image" src="#" alt="Selected Image" style="display: none;">
-    <br><br>
-    <button id="predict-button">Predict</button>
-    <div id="result"></div>
+    <div class="container">
+        <h1>AI Binary Classification</h1>
+        <div class="upload-section">
+            <p>Select an image to classify:</p>
+            <label for="file-input" class="custom-file-input">
+                <span>Choose File</span>
+                <input type="file" id="file-input" accept="image/*">
+            </label>
+        </div>
+        <div class="image-preview">
+            <img id="selected-image" src="#" alt="Selected Image">
+        </div>
+        <button id="predict-button">Predict</button>
+        <div id="result"></div>
+    </div>
 </body>
 </html>
