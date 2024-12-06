@@ -99,3 +99,34 @@ function displayResult(prediction) {
 
     resultDiv.innerHTML = `<strong>Image Name:</strong> ${imageName}<br><strong>Prediction:</strong> ${predictedClass}<br><strong>Confidence:</strong> ${confidencePercentage}%`;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.getElementById("file-input");
+    const predictButton = document.getElementById("predict-button");
+    const selectedImage = document.getElementById("selected-image");
+
+    // Hide the "Predict" button by default
+    predictButton.style.display = "none";
+
+    // Event listener for file input
+    fileInput.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+
+        if (file) {
+            // Display the image preview
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                selectedImage.src = e.target.result;
+                selectedImage.style.opacity = "1";
+                selectedImage.classList.add("show");
+            };
+            reader.readAsDataURL(file);
+
+            // Show the "Predict" button
+            predictButton.style.display = "block";
+        } else {
+            // Hide the "Predict" button if no file is selected
+            predictButton.style.display = "none";
+        }
+    });
+});

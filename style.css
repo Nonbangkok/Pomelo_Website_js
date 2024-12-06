@@ -1,9 +1,10 @@
-html {
+html, body {
     box-sizing: border-box;
     font-size: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 *, *::before, *::after {
@@ -21,15 +22,21 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column; /* Allows better stacking of content */
 }
 
 .my_container {
     width: 90%;
     max-width: 40rem;
-    margin: 2rem auto;
+    max-height: 90vh; /* Limits the height for small screens */
+    overflow-y: auto; /* Adds scroll if content overflows */
+    margin: 0 auto;
     text-align: center;
     background-color: #fff;
-    padding: 1.5rem 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 0.8rem;
     border-radius: 0.625rem;
     box-sizing: border-box;
     box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
@@ -83,20 +90,23 @@ h1 {
 }
 
 #selected-image {
-    max-width: 100%;
-    height: auto;
     display: none;
+    margin: 1.25rem auto;
+    max-width: 80%; /* Limit the width to 80% of the container */
+    max-height: 30vh; /* Reduce the maximum height to avoid taking up too much vertical space */
+    height: auto;
+    width: auto; /* Ensures the aspect ratio of the image is maintained */
     border-radius: 0.3125rem;
-    margin-top: 1.25rem;
     transition: opacity 0.3s ease;
     opacity: 0;
 }
-
 #selected-image.show {
+    display: block;
     opacity: 1;
 }
 
 #predict-button {
+    display: none;
     background-color: #28a745;
     color: #fff;
     border: none;
@@ -105,7 +115,10 @@ h1 {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    display: inline-block;
+}
+
+#predict-button.show {
+    display: inline-block; /* Show when needed */
 }
 
 #predict-button:hover {
@@ -114,7 +127,7 @@ h1 {
 
 #result {
     margin-top: 1.25rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
     word-break: break-word;
 }
@@ -149,4 +162,29 @@ h1 {
     .upload-section p {
         font-size: 0.9rem;
     }
+}
+
+#predict-button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;    /* Center vertically if necessary */
+    margin-top: 1rem;       /* Add some spacing above the button */
+}
+
+#predict-button {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 0.25rem 0.5rem rgba(40, 167, 69, 0.4);
+}
+
+#predict-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 0.4rem 0.6rem rgba(40, 167, 69, 0.5);
 }
