@@ -40,6 +40,9 @@ predictButton.addEventListener('click', async () => {
         return;
     }
 
+    const loadingSpinner = document.getElementById('loading-spinner');
+    loadingSpinner.style.display = 'block';
+
     predictButton.disabled = true;
     predictButton.textContent = 'Predicting...';
     const resultDiv = document.getElementById('result');
@@ -57,6 +60,7 @@ predictButton.addEventListener('click', async () => {
         resultDiv.className = 'alert alert-danger';
         resultDiv.textContent = 'An error occurred during prediction. Check console for details.';
     } finally {
+        loadingSpinner.style.display = 'none';
         predictButton.disabled = false;
         predictButton.textContent = 'Predict';
     }
@@ -93,5 +97,5 @@ function displayResult(prediction) {
         resultDiv.className = 'alert alert-danger';
     }
 
-    resultDiv.innerHTML = `<strong>Image Name:</strong> ${imageName}<br><strong>Prediction:</strong> ${predictedClass} (${confidencePercentage}% confidence)`;
+    resultDiv.innerHTML = `<strong>Image Name:</strong> ${imageName}<br><strong>Prediction:</strong> ${predictedClass}<br><strong>Confidence:</strong> ${confidencePercentage}%`;
 }
