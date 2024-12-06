@@ -7,22 +7,30 @@ body {
 }
 
 .container {
+    width: 90%;
     max-width: 500px;
-    margin: 80px auto;
+    margin: 40px auto;
     text-align: center;
     background-color: #fff;
-    padding: 40px;
+    padding: 20px;
     border-radius: 10px;
+    box-sizing: border-box;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     font-weight: 700;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    font-size: 1.8em;
 }
 
 .upload-section {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+.upload-section p {
+    margin-bottom: 10px;
+    font-size: 1em;
 }
 
 .custom-file-input {
@@ -34,7 +42,8 @@ h1 {
     background-color: #007bff;
     padding: 12px 25px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1em;
+    box-sizing: border-box;
 }
 
 .custom-file-input input[type="file"] {
@@ -43,10 +52,12 @@ h1 {
     top: 0;
     opacity: 0;
     cursor: pointer;
+    width: 100%;
+    height: 100%;
 }
 
 .image-preview {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 #selected-image {
@@ -63,7 +74,7 @@ h1 {
     border: none;
     padding: 14px 40px;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 1em;
     cursor: pointer;
 }
 
@@ -72,8 +83,28 @@ h1 {
 }
 
 #result {
-    margin-top: 40px;
-    font-size: 20px;
+    margin-top: 20px;
+    font-size: 1.2em;
     font-weight: 700;
-    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    .custom-file-input, #predict-button {
+        font-size: 0.9em;
+        padding: 10px 20px;
+    }
+    #result {
+        font-size: 1em;
+    }
+    .container {
+        padding: 15px;
+    }
+    .upload-section p {
+        font-size: 0.9em;
+    }
 }
