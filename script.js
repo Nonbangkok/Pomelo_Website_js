@@ -23,6 +23,8 @@ fileInput.addEventListener('change', (event) => {
         reader.onload = (e) => {
             selectedImage.src = e.target.result;
             selectedImage.style.display = 'block';
+            selectedImage.offsetHeight;
+            selectedImage.classList.add('show');
         };
         reader.readAsDataURL(file);
     }
@@ -40,7 +42,9 @@ predictButton.addEventListener('click', async () => {
 
     predictButton.disabled = true;
     predictButton.textContent = 'Predicting...';
-    resultDiv.textContent = '';
+    const resultDiv = document.getElementById('result');
+    resultDiv.style.display = 'none';
+    resultDiv.className = 'alert alert-secondary';
 
     const imageTensor = preprocessImage(selectedImage);
 
@@ -49,7 +53,9 @@ predictButton.addEventListener('click', async () => {
         displayResult(prediction);
     } catch (error) {
         console.error('Error during prediction:', error);
-        alert('An error occurred during prediction. Please check the console for more details.');
+        resultDiv.style.display = 'block';
+        resultDiv.className = 'alert alert-danger';
+        resultDiv.textContent = 'An error occurred during prediction. Check console for details.';
     } finally {
         predictButton.disabled = false;
         predictButton.textContent = 'Predict';
@@ -78,5 +84,14 @@ function displayResult(prediction) {
         confidencePercentage = ((1 - confidence) * 100).toFixed(2);
     }
 
-    resultDiv.innerHTML = `Image Name: ${imageName}<br>Prediction: ${predictedClass} (${confidencePercentage}% confidence)`;
+    const resultDiv = document.getElementById('result');
+    resultDiv.style.display = 'block';
+    
+    if (predictedClass === 'Good') {
+        resultDiv.className = 'alert alert-success';
+    } else {
+        resultDiv.className = 'alert alert-danger';
+    }
+
+    resultDiv.innerHTML = `<strong>Image Name:</strong> ${imageName}<br><strong>Prediction:</strong> ${predictedClass} (${confidencePercentage}% confidence)`;
 }
