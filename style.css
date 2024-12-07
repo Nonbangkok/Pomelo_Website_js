@@ -22,14 +22,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column; /* Allows better stacking of content */
+    flex-direction: column;
 }
 
 .my_container {
     width: 90%;
     max-width: 40rem;
-    max-height: 90vh; /* Limits the height for small screens */
-    overflow-y: auto; /* Adds scroll if content overflows */
+    max-height: 90vh;
+    overflow-y: auto;
     margin: 0 auto;
     text-align: center;
     background-color: #fff;
@@ -92,10 +92,10 @@ h1 {
 #selected-image {
     display: none;
     margin: 1.25rem auto;
-    max-width: 80%; /* Limit the width to 80% of the container */
-    max-height: 30vh; /* Reduce the maximum height to avoid taking up too much vertical space */
+    max-width: 80%;
+    max-height: 30vh;
     height: auto;
-    width: auto; /* Ensures the aspect ratio of the image is maintained */
+    width: auto;
     border-radius: 0.3125rem;
     transition: opacity 0.3s ease;
     opacity: 0;
@@ -118,7 +118,7 @@ h1 {
 }
 
 #predict-button.show {
-    display: inline-block; /* Show when needed */
+    display: inline-block;
 }
 
 #predict-button:hover {
@@ -166,9 +166,9 @@ h1 {
 
 #predict-button-container {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;    /* Center vertically if necessary */
-    margin-top: 1rem;       /* Add some spacing above the button */
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
 }
 
 #predict-button {
