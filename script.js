@@ -7,7 +7,7 @@ let imageName = '';
 
 (async function() {
     try {
-        model = await tf.loadLayersModel('model_30_no_augmented_json/model.json');
+        model = await tf.loadLayersModel('new_model/model.json');
         console.log('Model loaded successfully');
     } catch (error) {
         console.error('Error loading the model:', error);
