@@ -8,12 +8,12 @@ let currentImageSource = ''; // 'file' or 'sample'
 
 // Sample images array - add all images from /img folder
 const sampleImages = [
-    { src: '../img/1.jpg', name: 'Sample 1' },
-    { src: '../img/2.jpg', name: 'Sample 2' },
-    { src: '../img/3.jpg', name: 'Sample 3' },
-    { src: '../img/4.jpg', name: 'Sample 4' },
-    { src: '../img/5.jpg', name: 'Sample 5' },
-    { src: '../img/6.jpg', name: 'Sample 6' }
+    { src: './img/1.jpg', name: 'Sample 1' },
+    { src: './img/2.jpg', name: 'Sample 2' },
+    { src: './img/3.jpg', name: 'Sample 3' },
+    { src: './img/4.jpg', name: 'Sample 4' },
+    { src: './img/5.jpg', name: 'Sample 5' },
+    { src: './img/6.jpg', name: 'Sample 6' }
 ];
 
 (async function() {
