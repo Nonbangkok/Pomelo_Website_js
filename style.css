@@ -27,7 +27,7 @@ body {
 
 .my_container {
     width: 90%;
-    max-width: 40rem;
+    max-width: 50rem;
     max-height: 90vh;
     overflow-y: auto;
     margin: 0 auto;
@@ -48,13 +48,25 @@ h1 {
     font-size: 1.8rem;
 }
 
-.upload-section {
-    margin-bottom: 1.25rem;
+h3 {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    color: #2c3e50;
 }
 
-.upload-section p {
+.upload-section, .sample-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.upload-section p, .sample-section p {
     margin-bottom: 0.625rem;
     font-size: 1rem;
+    color: #6c757d;
 }
 
 .custom-file-input {
@@ -85,6 +97,51 @@ h1 {
     height: 100%;
 }
 
+.sample-images-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.sample-image-item {
+    position: relative;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.sample-image-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.sample-image-item.selected {
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+}
+
+.sample-image-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+.sample-image-item .image-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.25rem;
+    font-size: 0.7rem;
+    text-align: center;
+}
+
 .image-preview {
     margin-bottom: 1.25rem;
 }
@@ -99,6 +156,7 @@ h1 {
     border-radius: 0.3125rem;
     transition: opacity 0.3s ease;
     opacity: 0;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 #selected-image.show {
     display: block;
@@ -152,6 +210,9 @@ h1 {
     h1 {
         font-size: 1.5rem;
     }
+    h3 {
+        font-size: 1.1rem;
+    }
     .custom-file-input, #predict-button {
         font-size: 0.9rem;
         padding: 0.75rem 1.5rem;
@@ -159,8 +220,19 @@ h1 {
     #result {
         font-size: 1rem;
     }
-    .upload-section p {
+    .upload-section p, .sample-section p {
         font-size: 0.9rem;
+    }
+    .sample-images-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+    }
+    .sample-image-item img {
+        height: 80px;
+    }
+    .sample-image-item .image-label {
+        font-size: 0.6rem;
+        padding: 0.2rem;
     }
 }
 
